@@ -309,25 +309,36 @@ function BossFilter:SetItemRef(link, text, button)
 end
 
 function BossFilter:Play(instance, boss, text, sound)
-	if self:getSound() then 
-		PlaySoundFile("Sound\\Creature\\"..sound..".wav")
-	end
+    -- Play sound if enabled
+    if self:getSound() then 
+        PlaySoundFile("Sound\\Creature\\"..sound..".wav")
+    end
+
+    -- Add output to error and default chat frames
     if self:getAddOutput() then
         self:Print("Quoted from |cffffff00"..boss.."|r")
-        UIErrorsFrame:AddMessage(text, 1.0, 0.2, 0.2, 1, 5);
-		DEFAULT_CHAT_FRAME:AddMessage(text, 1.0, 0.2, 0.2, 1, 5);
+        UIErrorsFrame:AddMessage(text, 1.0, 0.2, 0.2, 1, 5)
+        DEFAULT_CHAT_FRAME:AddMessage(text, 1.0, 0.2, 0.2, 1, 5)
     end
-	if (self:getText() and self:getChannel()~=nil) then
-		if self:getChannel() == "EMOTE" then
-			SendChatMessage(" quotes "..boss..": \""..text.."\"", channels[self:getChannel()]) 
-		else
-            if (GetChannelName(self:getChannel()) == nil) then
-                SendChatMessage(text, channels[self:getChannel()])
+
+    -- Send message to the appropriate chat channel
+    if self:getText() and self:getChannel() ~= nil then
+        local channel = self:getChannel()
+        if channel == "EMOTE" then
+            -- If EMOTE channel, send an emote message
+            SendChatMessage(" quotes "..boss..": \""..text.."\"", "EMOTE")
+        else
+            -- Check if the channel exists
+            local channelName = GetChannelName(channel)
+            if channelName == 0 then
+                -- Channel doesn't exist
+                print("Error: Invalid channel -", channel)
             else
-                SendChatMessage(text, "CHANNEL", nil, GetChannelName(channels[self:getChannel()]))
+                -- Send message to the channel
+                SendChatMessage(text, "CHANNEL", nil, channelName)
             end
-		end
-	end
+        end
+    end
 end
 
 function BossFilter:Levenshtein(s, t)
