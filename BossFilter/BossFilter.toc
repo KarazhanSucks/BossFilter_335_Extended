@@ -1,0 +1,18 @@
+## Interface: 30300
+## Title: BossFilter
+## Notes: Plays boss quotes in raids. 
+## Author: Uhman
+## Version: v1.01
+## SavedVariables: BossFilterDB
+## DefaultState: enabled
+## LoadOnDemand: 0
+## OptionalDeps: Ace3
+## X-Embeds: Ace3
+## X-Category: Audio
+## X-Curse-Packaged-Version: v1.01
+## X-Curse-Project-Name: BossFilter
+## X-Curse-Project-ID: bossfilter
+## X-Curse-Repository-ID: wow/bossfilter/mainline
+
+Core.lua
+Data.lua
