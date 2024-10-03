@@ -322,23 +322,23 @@ function BossFilter:Play(instance, boss, text, sound)
     end
 
     -- Send message to the appropriate chat channel
-    if self:getText() and self:getChannel() ~= nil then
-        local channel = self:getChannel()
-        if channel == "EMOTE" then
-            -- If EMOTE channel, send an emote message
-            SendChatMessage(" quotes "..boss..": \""..text.."\"", "EMOTE")
-        else
-            -- Check if the channel exists
-            local channelName = GetChannelName(channel)
-            if channelName == 0 then
-                -- Channel doesn't exist
-                print("Error: Invalid channel -", channel)
-            else
-                -- Send message to the channel
-                SendChatMessage(text, "CHANNEL", nil, channelName)
-            end
-        end
-    end
+    -- if self:getText() and self:getChannel() ~= nil then
+    --     local channel = self:getChannel()
+    --     if channel == "EMOTE" then
+    --         -- If EMOTE channel, send an emote message
+    --         SendChatMessage(" quotes "..boss..": \""..text.."\"", "EMOTE")
+    --     else
+    --         -- Check if the channel exists
+    --         local channelName = GetChannelName(channel)
+    --         if channelName == 0 then
+    --             -- Channel doesn't exist
+    --             print("Error: Invalid channel -", channel)
+    --         else
+    --             -- Send message to the channel
+    --             SendChatMessage(text, "CHANNEL", nil, channelName)
+    --         end
+    --     end
+    -- end
 end
 
 function BossFilter:Levenshtein(s, t)
